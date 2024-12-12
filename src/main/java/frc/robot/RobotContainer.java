@@ -62,7 +62,7 @@ public class RobotContainer {
 
 
     //buttons
-    leafBlowerButton.whileTrue(m_leafBlowerCommand);
+    leafBlowerButton.onTrue(m_leafBlowerCommand);
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
