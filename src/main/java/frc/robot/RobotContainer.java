@@ -5,12 +5,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.LeafBlowerCommand;
 import frc.robot.subsystems.DrivetrainSubsytem;
+import frc.robot.subsystems.LeafBlowerSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,9 +22,18 @@ import frc.robot.subsystems.DrivetrainSubsytem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  DrivetrainSubsytem m_drivetrainSubsytem = new DrivetrainSubsytem();
 
-  public final static CommandXboxController m_driverController = new CommandXboxController(Constants.XBOX_CONTROLLER_PORT);
+  //Subsystems
+  DrivetrainSubsytem m_drivetrainSubsytem = new DrivetrainSubsytem();
+  LeafBlowerSubsystem m_leafBlowerSubsystem = new LeafBlowerSubsystem();
+
+
+
+  //Commands
+  LeafBlowerCommand m_leafBlowerCommand = new LeafBlowerCommand(m_leafBlowerSubsystem);
+
+
+
   public final static Joystick controler = new Joystick(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -42,6 +52,15 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
+
+    //buttons
+    Trigger leafBlowerButton = new JoystickButton(controler, Constants.LEAF_BLOWER_BUTTON);
+
+
+    //buttons
+    leafBlowerButton.toggleOnTrue(m_leafBlowerCommand);
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

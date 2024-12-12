@@ -19,4 +19,10 @@ public final class Constants {
   public static int BACK_LEFT_MOTOR_ID = 6;
 
   public static int XBOX_CONTROLLER_PORT = 0;
+
+  //leaf Blower
+  public static int LEAF_BLOWER_MOTOR_ID = 10;
+  public static int LEAF_BLOWER_BUTTON = 2; //Button A
+  public static double LEAF_BLOWER_RUN_SPEED = 1; 
+  public static int LEAF_BLOWER_STOP_SPEED = 0;
 }
