@@ -22,7 +22,8 @@ public final class Constants {
 
   //leaf Blower
   public static int LEAF_BLOWER_MOTOR_ID = 10;
-  public static int LEAF_BLOWER_BUTTON = 2; //Button A
+  // public static int LEAF_BLOWER_BUTTON = 2; //Button A for some controller
+  public static int LEAF_BLOWER_BUTTON = 0; //Button A for Mostly Operation Logitech X-box controller
   public static double LEAF_BLOWER_RUN_SPEED = 1; 
   public static int LEAF_BLOWER_STOP_SPEED = 0;
 }
