@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,7 +34,7 @@ public class RobotContainer {
 
 
 
-  public final static Joystick controler = new Joystick(0);
+  public final static PS4Controller controler = new PS4Controller(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -63,7 +63,7 @@ public class RobotContainer {
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // Schedule `exampleMethodCommand` when the Xbox controller's A button is pressed,
     // cancelling on release.
     // m_driverController.a().onTrue(new InstantCommand(()->System.out.println("a")));
   }
