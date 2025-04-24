@@ -32,8 +32,8 @@ public class DrivetrainSubsytem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    frontLeftMotor.set((RobotContainer.controler.getLeftY() * -1.0 * .5) + RobotContainer.controler.getLeftX()  * .5);
-    frontRightMotor.set((RobotContainer.controler.getLeftY() * 1.0 * .5) + RobotContainer.controler.getLeftX() * .5);
+    frontLeftMotor.set( (RobotContainer.controler.getLeftY() * -.5) + RobotContainer.controler.getLeftX() * .5);
+    frontRightMotor.set((RobotContainer.controler.getLeftY() * .5)  + RobotContainer.controler.getLeftX() * .5);
     
   }
 }
