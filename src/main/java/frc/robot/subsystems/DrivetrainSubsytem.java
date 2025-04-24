@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class DrivetrainSubsytem extends SubsystemBase {
@@ -31,7 +32,8 @@ public class DrivetrainSubsytem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    frontLeftMotor.set(RobotContainer.controler.getLeftY() * -1.0);
-    frontRightMotor.set(RobotContainer.controler.getRightY() * 1.0);
+    frontLeftMotor.set((RobotContainer.controler.getLeftY() * -1.0 * .5) + RobotContainer.controler.getLeftX()  * .5);
+    frontRightMotor.set((RobotContainer.controler.getLeftY() * 1.0 * .5) + RobotContainer.controler.getLeftX() * .5);
+    
   }
 }
