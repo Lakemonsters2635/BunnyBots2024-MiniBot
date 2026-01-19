@@ -22,6 +22,7 @@ public class LeafBlowerCommand extends Command {
   @Override
   public void initialize() {
     m_leafBlowerSubsystem.runLeafBlower();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
