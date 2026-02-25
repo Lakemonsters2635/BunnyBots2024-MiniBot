@@ -4,41 +4,52 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.PersistMode;
+import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.Constants;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class DrivetrainSubsytem extends SubsystemBase {
   /** Creates a new DrivetrainSubsytem. */
-  CANSparkMax frontLeftMotor;
-  CANSparkMax frontRightMotor;
-  CANSparkMax backLeftMotor;
-  CANSparkMax backRightMotor;
+  SparkMax frontLeftMotor;
+  SparkMax frontRightMotor;
+  SparkMax backLeftMotor;
+  SparkMax backRightMotor;
 
   double leftMotorSpeedX = 0;
   double rightMotorSpeedX = 0;
   double leftMotorSpeedY = 0;
   double rightMotorSpeedY = 0;
+  SparkMaxConfig config = new SparkMaxConfig();
+
+
 
   public DrivetrainSubsytem() {
-    frontLeftMotor = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_ID, MotorType.kBrushless);
-    frontRightMotor = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_ID, MotorType.kBrushless);
-    backLeftMotor = new CANSparkMax(Constants.BACK_LEFT_MOTOR_ID, MotorType.kBrushless);
-    backRightMotor = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_ID, MotorType.kBrushless);
+    frontLeftMotor = new SparkMax(Constants.FRONT_LEFT_MOTOR_ID, MotorType.kBrushless);
+    frontRightMotor = new SparkMax(Constants.FRONT_RIGHT_MOTOR_ID, MotorType.kBrushless);
+    backLeftMotor = new SparkMax(Constants.BACK_LEFT_MOTOR_ID, MotorType.kBrushless);
+    backRightMotor = new SparkMax(Constants.BACK_RIGHT_MOTOR_ID, MotorType.kBrushless);
 
-    frontLeftMotor.setIdleMode(IdleMode.kBrake);
-    frontRightMotor.setIdleMode(IdleMode.kBrake);
-    backLeftMotor.setIdleMode(IdleMode.kBrake);
-    backRightMotor.setIdleMode(IdleMode.kBrake);
+    config.idleMode(SparkBaseConfig.IdleMode.kBrake);
 
-    backLeftMotor.follow(frontLeftMotor);
-    backRightMotor.follow(frontRightMotor);
+    frontLeftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    frontRightMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    backLeftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    backRightMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+
+    // backLeftMotor.follow(frontLeftMotor);
+    // backRightMotor.follow(frontRightMotor);
+
+
+
+
+
   }
 
   @Override
