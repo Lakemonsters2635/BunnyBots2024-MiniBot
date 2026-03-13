@@ -8,10 +8,11 @@ import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import frc.robot.Constants;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class DrivetrainSubsytem extends SubsystemBase {
@@ -25,8 +26,6 @@ public class DrivetrainSubsytem extends SubsystemBase {
   double rightMotorSpeedX = 0;
   double leftMotorSpeedY = 0;
   double rightMotorSpeedY = 0;
-  SparkMaxConfig config = new SparkMaxConfig();
-
 
 
   public DrivetrainSubsytem() {
@@ -35,21 +34,22 @@ public class DrivetrainSubsytem extends SubsystemBase {
     backLeftMotor = new SparkMax(Constants.BACK_LEFT_MOTOR_ID, MotorType.kBrushless);
     backRightMotor = new SparkMax(Constants.BACK_RIGHT_MOTOR_ID, MotorType.kBrushless);
 
-    config.idleMode(SparkBaseConfig.IdleMode.kBrake);
+    SparkMaxConfig baseConfig = new SparkMaxConfig();
+    baseConfig.idleMode(IdleMode.kBrake);
 
-    frontLeftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    frontRightMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    backLeftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    backRightMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    SparkMaxConfig leftFollowerConfig = new SparkMaxConfig();
+    leftFollowerConfig.apply(baseConfig);
+    leftFollowerConfig.follow(Constants.FRONT_LEFT_MOTOR_ID);
 
-
-    // backLeftMotor.follow(frontLeftMotor);
-    // backRightMotor.follow(frontRightMotor);
-
-
-
-
-
+    SparkMaxConfig rightFollowerConfig = new SparkMaxConfig();
+    rightFollowerConfig.apply(baseConfig);
+    rightFollowerConfig.follow(Constants.FRONT_RIGHT_MOTOR_ID);
+  
+    frontLeftMotor.configure(baseConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    frontRightMotor.configure(baseConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    
+    backLeftMotor.configure(leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    backRightMotor.configure(rightFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
